@@ -2,19 +2,35 @@
 // https://raw.githubusercontent.com/plotters-rs/plotters/master/plotters/examples/stock.rs
 // Times Series Chart
 
-
+use chrono::naive::NaiveDateTime;
 use chrono::offset::{Local, TimeZone};
-use chrono::{Date, Duration};
+use chrono::{Duration, NaiveDate, NaiveTime};
 use plotters::prelude::*;
-fn parse_time(t: &str) -> Date<Local> {
+
+
+fn parse_time(date: &str) -> NaiveDate {
+
+// "2019-04-25"
+    let _d = NaiveDate::parse_from_str(date, "%Y-%m-%d").unwrap();
+
+    // let _d = NaiveDate::from_ymd_opt(_date).unwrap();
+    let _time = NaiveTime::from_hms_milli_opt(0,0,0,0).unwrap();
+    let _dt = NaiveDateTime::new(_d, _time);
     Local
-        .datetime_from_str(&format!("{} 0:0", t), "%Y-%m-%d %H:%M")
+        //.from_local_datetime(&format!("{} 0:0", _dt))
+        .from_local_datetime(&_dt)        //DateTime::parse_from_str
+        //NaiveDateTime::parse_from_str
+        // .parse_from_str(&format!("{} 0:0", t), "%Y-%m-%d %H:%M")
+        // .datetime_from_str(&format!("{} 0:0", t), "%Y-%m-%d %H:%M")
         .unwrap()
-        .date()
+        .date_naive()
 }
+
 const OUT_FILE_NAME: &str = "plotters-doc-data/07_stock.png";
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let data = get_data();
+
     let root = BitMapBackend::new(OUT_FILE_NAME, (1024, 768)).into_drawing_area();
     root.fill(&WHITE)?;
 
@@ -82,6 +98,5 @@ fn get_data() -> Vec<(&'static str, f32, f32, f32, f32)> {
 fn entry_point() {
     main().unwrap()
 }
-
 
 // cargo eun --example
