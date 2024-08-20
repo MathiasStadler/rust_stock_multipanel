@@ -1,7 +1,7 @@
 // FROM HERE
 // 
 
-use plotters::prelude::*;
+
 
 fn main() {
     let root = BitMapBackend::new("images/multi-panel-figure.png", (640, 480)).into_drawing_area();
