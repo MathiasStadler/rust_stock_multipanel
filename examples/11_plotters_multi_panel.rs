@@ -30,7 +30,11 @@ const OUT_FILE_NAME: &str = "plotters-doc-data/11_stock.png";
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let data: Vec<(&'static str, f32, f32, f32, f32)> = get_data();
 
-    get_data_from_csv();
+    let vec_from_csv = get_data_from_csv();
+
+    let vec_output:Vec<(String, f64, f64, f64, f64, f64)> = vec_from_csv.iter().collect();
+
+    println!("{:?}", vec_output);
 
     let root = BitMapBackend::new(OUT_FILE_NAME, (1024, 768)).into_drawing_area();
     root.fill(&WHITE)?;
