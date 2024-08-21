@@ -1,6 +1,6 @@
 use ta::DataItem;
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Hello, panel!");
 
     //get data from csv
@@ -18,6 +18,7 @@ fn main() {
     }
 
     // println!("{:?}",stock_data);
+    Ok(())
 }
 
 fn get_data_from_csv() -> Vec<(String, f64, f64, f64, f64, f64)> {
