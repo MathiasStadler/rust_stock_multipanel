@@ -1,10 +1,11 @@
 // example convert inside fn String to str
 
 use chrono::ParseError;
-use chrono::naive::NaiveDateTime;
-use chrono::offset::{Local, TimeZone};
-use chrono::{Duration, NaiveDate, NaiveTime};
-use plotters::prelude::*;
+// use chrono::naive::NaiveDateTime;
+// use chrono::offset::{Local, TimeZone};
+use chrono::NaiveDateTime;
+use chrono::{Duration, NaiveTime};
+// use plotters::prelude::*;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Hello, panel!");
@@ -29,13 +30,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("End Date {:?}", data[data.len() - 1].0);
 
     let (to_date, from_date) = (
-        parse_time(&data[0].0) + Duration::days(1),
-        parse_time(&data[data.len() - 1].0) - Duration::days(1),
+        parse_time(&data[0].0).unwrap() + Duration::days(1),
+        parse_time(&data[data.len() - 1].0).unwrap() - Duration::days(1),
     );
 
     println!("count data => {}", data.len());
-    println!(" to_date => {}", to_date);
-    println!("from_data =>{}", from_date);
+    println!(" to_date => {:?}", to_date);
+    println!("from_data =>{:?}", from_date);
 
     Ok(())
 }
@@ -47,11 +48,45 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 //     };
 // }
 
-fn parse_time(t: &String) -> Result<Duration, ParseError> {
-    return match Local.datetime_from_str(&format!("2020-01-01 0:{}", t.as_str()), "%Y-%m-%d %H:%M:%S%.f") {
-        Ok(date) => Ok(date.time().signed_duration_since(NaiveTime::from_hms(0, 0, 0))),
-        Err(e) => { println!("{}", e); Err(e) },
+// fn parse_time(t: &String) -> Result<Duration, ParseError> {
+//     return match NaiveDateTime::parse_from_str(&format!("2020-01-01 0:{}", t.as_str()), "%Y-%m-%d %H:%M:%S%.f") {
+//         Ok(date) => Ok(date.time().signed_duration_since(NaiveTime::from_hms_opt(0, 0, 0).expect("REASON"))),
+//         Err(e) => { println!("{}", e); Err(e) },
+//     };
+// }
+
+// // 2021-01-05
+// fn parse_time(time_str: &String) -> Result<Duration, ParseError> {
+//     println!("{}", time_str);
+//     return match NaiveDateTime::parse_from_str(time_str, "%Y-%m-%d") {
+//         Ok(date) => Ok(date
+//             .time()
+//             .signed_duration_since(NaiveTime::from_hms_opt(0, 0, 0).expect("REASON"))),
+//         Err(e) => {
+//             println!("{}", e);
+//             Err(e)
+//         }
+//     };
+// }
+
+// 2021-01-05 00:00:00
+fn parse_time(time_str: &String) -> Result<Duration, ParseError> {
+    println!("time_str => {}", time_str);
+    println!("time format => {}",format!("{} 00:00:00", time_str ));
+   
+    let return_date = match NaiveDateTime::parse_from_str(&format!("{} 00:00:00", time_str), "%Y-%m-%d %H:%M:%S%.f" ) {
+        Ok(date) => Ok(date
+            .time()
+            .signed_duration_since(NaiveTime::from_hms_opt(0, 0, 0).expect("REASON"))),
+        Err(e) => {
+            println!("{}", e);
+            Err(e)
+        }
     };
+
+    println!("return_data => {:?}",return_date);
+
+    return return_date
 }
 
 //fn get_data_from_csv(
