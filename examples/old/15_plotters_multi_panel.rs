@@ -3,7 +3,7 @@ use chrono::offset::{Local, TimeZone};
 use chrono::{Duration, NaiveDate, NaiveTime};
 use plotters::prelude::*;
 
-const OUT_FILE_NAME: &str = "plotters-doc-data/15_stock.png";
+const OUT_FILE_NAME: &str = "plotters-doc-data/15_1_stock.png";
 
 fn parse_time(date: &str) -> NaiveDate {
     let _d = NaiveDate::parse_from_str(date, "%Y-%m-%d").unwrap();
@@ -120,4 +120,4 @@ fn get_data_from_csv(mut return_vec:Vec<(String, f32, f32, f32, f32, f32)>) -> V
     return_vec
 }
 
-// cargo run --example 13_plotters_multi_panel
+// cargo run --example 15_plotters_multi_panel

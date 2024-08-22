@@ -6,7 +6,7 @@ use chrono::{Duration, NaiveDate, NaiveTime};
 use plotters::prelude::*;
 
 
-const OUT_FILE_NAME: &str = "plotters-doc-data/14_stock.png";
+const OUT_FILE_NAME: &str = "plotters-doc-data/14_1_stock.png";
 
 
 fn parse_time(date: &str) -> NaiveDate {
