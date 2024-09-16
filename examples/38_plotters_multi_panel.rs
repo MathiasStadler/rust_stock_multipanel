@@ -4,6 +4,8 @@
 use plotters::prelude::full_palette::RED;
 #[allow(unused_imports)]
 use plotters::prelude::full_palette::YELLOW;
+#[allow(unused_imports)]
+use plotters::prelude::full_palette::GREEN;
 use std::path::Path;
 // use plotters::prelude::*;
 use plotters::backend::BitMapBackend;
@@ -43,20 +45,26 @@ fn main() {
     left.fill(&RED).unwrap();
 
     // We can also split upper and lower panel
-    let upper_areas = right.split_evenly((10, 1));
+    let upper_areas = right.split_evenly((3, 1));
+
     let (upper_one, upper_two) = right.split_vertically(2);
 
     upper_one.fill(&Palette99::pick(1)).unwrap();
 
     upper_one.relative_to_height(30.0);
 
-    let _ = upper_two.titled("This is the title", ("serif", 30));
+    let _left_title = upper_two.titled("This is the title", ("serif", 30));
 
     upper_two.fill(&Palette99::pick(5)).unwrap();
 
-    for (id, area) in upper_areas.into_iter().enumerate() {
-        area.fill(&Palette99::pick(id)).unwrap();
-    }
+    let chart_1 = upper_areas.get(0);
+
+    // chart_1.fill(&GREEN).unwrap();
+    chart_1.expect("REASON").fill(&GREEN).unwrap();
+
+    //for (id, area) in upper_areas.into_iter().enumerate() {
+    //    area.fill(&Palette99::pick(id)).unwrap();
+    //}
 
     // for (id, area) in lower_areas.into_iter().enumerate() {
     //     area.fill(&Palette99::pick(id)).unwrap();
@@ -74,4 +82,4 @@ fn main() {
 
 // cargo run --example
 
-// cargo run --example 37_plotters_multi_panel
+// cargo run --example 38_plotters_multi_panel
