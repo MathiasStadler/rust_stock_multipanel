@@ -1,21 +1,21 @@
 // FROM HERE
 // https://plotters-rs.github.io/book/basic/multipanel.html
 
+use plotters::prelude::full_palette::BLUE;
 #[allow(unused_imports)]
 use plotters::prelude::full_palette::GREEN;
+#[allow(unused_imports)]
 use plotters::prelude::full_palette::RED;
-use plotters::prelude::full_palette::BLUE;
 #[allow(unused_imports)]
 use plotters::prelude::full_palette::YELLOW;
 use plotters::style::full_palette::ORANGE;
 use std::path::Path;
-// use plotters::prelude::*;
+
 use plotters::backend::BitMapBackend;
 use plotters::drawing::IntoDrawingArea;
-// use plotters::prelude::Palette99;
+
 use plotters::style::AsRelative;
-// use plotters::style::Palette;
-// use plotters::prelude::full_palette::ORANGE;
+
 fn main() {
     let this_file = file!();
     println!("filename: {}", this_file);
@@ -32,29 +32,28 @@ fn main() {
     println!("target filename: {}", output_png_filename);
 
     let root: plotters::prelude::DrawingArea<BitMapBackend<'_>, plotters::coord::Shift> =
-        // BitMapBackend::new("images/36_split-drawing-area.png", (640, 480)).into_drawing_area();
+        
         BitMapBackend::new(&output_png_filename, (1920, 1080)).into_drawing_area();
 
-    // We can split to left panel and right panel 15% left, 85% right
-
-    // left side
+    // split panel to left and right
     let (left, right) = root.split_horizontally((15_i32).percent_width());
-    left.fill(&RED).unwrap();
 
-    // We can also split upper and lower panel
+    // give left side color
+    left.fill(&YELLOW).unwrap();
+
+    // split upper and lower panel in three parts
     let upper_areas = right.split_evenly((3, 1));
 
-    let (upper_one, upper_two) = right.split_vertically(2);
+    // let (upper_one, upper_two) = right.split_vertically(2);
 
-    upper_one.fill(&RED).unwrap();
+    // upper_one.fill(&RED).unwrap();
 
-    upper_one.relative_to_height(30.0);
+    // upper_one.relative_to_height(30.0);
 
-    let _left_title = upper_two.titled("This is the title", ("serif", 30));
+    // let _left_title = upper_two.titled("This is the title", ("serif", 30));
 
-    // upper_two.fill(&Palette99::pick(5)).unwrap();
-    // fill(&GREEN).unwrap();
-    upper_two.fill(&GREEN).unwrap();
+    
+    // upper_two.fill(&GREEN).unwrap();
 
     let chart_0 = upper_areas.get(0);
 
