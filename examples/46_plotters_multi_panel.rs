@@ -72,9 +72,10 @@ fn main() {
     //start
     let mut upper_chart = ChartBuilder::on(&drawing_area_1)
         .margin(50)
+        .set_label_area_size(LabelAreaPosition::Top, 30)
         .set_label_area_size(LabelAreaPosition::Left, 30)
         .set_label_area_size(LabelAreaPosition::Right, 30)
-        .set_label_area_size(LabelAreaPosition::Top, 30)
+        .set_label_area_size(LabelAreaPosition::Bottom, 30)
         .caption("Prime Distribution", ("sans-serif", 40))
         .build_cartesian_2d(0.0..10.0, -1.0..1.0)
         .unwrap();

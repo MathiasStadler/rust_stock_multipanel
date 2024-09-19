@@ -121,3 +121,17 @@ curl --output stock_data/stock_trex_data.csv https://stooq.com/q/d/l/?s=TREX.US&
 cargo watch
 
 ```
+
+## add ssh support
+
+```bash
+sudo apt-get install pkg-config libssl-dev
+```
+
+## add fontconfig support
+
+```bash
+https://github.com/yeslogic/fontconfig-rs
+
+sudo apt-get  install libfontconfig1-dev
+```
