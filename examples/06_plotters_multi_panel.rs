@@ -84,4 +84,4 @@ fn entry_point() {
 }
 
 
-// cargo eun --example
+// cargo run --example old/06_plotters_multi_panel.rs
