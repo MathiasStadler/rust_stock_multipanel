@@ -3,3 +3,4 @@ stock_data/**/*
 images/**/*
 plotters-doc-data/**/*
 **/*.csv
+**/*.png
